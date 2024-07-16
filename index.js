@@ -1,5 +1,5 @@
 //functions
-
+const optFind = findValue();
 //functional declaration
 console.log("return form dec:", someFunc(15));
 function someFunc(parameter) {
@@ -126,3 +126,114 @@ let newZenARR = arr.zenMap((ele, index, accArr) => {
 });
 
 console.log(newZenARR);
+
+var loc = "banglore";
+const myDetails = {
+  loc: "chennai",
+  //wrapper function
+  getLocInObject() {
+    var getLocation = () => {
+      console.log("inside object", this.loc); //chennai
+    };
+    getLocation();
+  },
+};
+myDetails.getLocInObject();
+console.log(this);
+console.log("global object", this.loc); //banglore
+
+//what this targets
+//scope of this keyword
+//what will be the this scope of this in normal and arrow function
+// how will you change the scope if the function should be an arrow function
+
+//Prototypes
+
+class Students {
+  constructor(name, batch) {
+    this.name = name;
+    this.batch = batch;
+  }
+  getName() {
+    console.log("The name of the student is ", this.name);
+  }
+}
+
+Students.prototype.getbatch = function () {
+  console.log("The batch is ", this.batch);
+};
+
+const arun = new Students("Arun", "FSD");
+console.log(arun);
+arun.getName();
+arun.getbatch();
+const chitra = new Students("Chitra", "FSD2");
+console.log(chitra);
+chitra.getName();
+chitra.getbatch();
+
+// I want write a prototype on Array to find a value a exist or not
+Array.prototype.zenExist = function (val) {
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] === val) {
+      return true;
+    }
+  }
+  return false;
+};
+const newsetArr = [12, 34, , 67, 8, 9, 0];
+console.log("Does Exist ", newsetArr.zenExist(67));
+// zenExist();
+
+//Closures
+function CreateFunc() {
+  const val = "somevalue";
+  function giveVal() {
+    console.log("Value is ", val);
+  }
+  return giveVal;
+}
+
+const func = CreateFunc();
+console.log(func);
+func();
+
+function add(num) {
+  //memory num
+  return function (num2) {
+    //memory num and num2
+    return function (num3) {
+      //memory num and num2 and num3
+      return num + num2 + num3;
+    };
+  };
+}
+const sumofFive = add(5);
+console.log(sumofFive);
+const sumofTen = sumofFive(10);
+console.log(sumofTen);
+const sumOfFifteen = sumofTen(15);
+console.log(sumOfFifteen);
+
+//curried function
+console.log(add(5)(10)(15));
+
+//Optimize the porgramm
+function findValue() {
+  let a = [];
+  for (let i = 0; i < 10000000; i++) {
+    a[i] = i * i;
+  }
+  //closure
+  return function (index) {
+    console.log(a[index]);
+  };
+}
+
+console.time("first-operation");
+optFind(8);
+console.timeEnd("first-operation");
+//call apply bind
+//debouncing and throtlling
+//events
+//

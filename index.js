@@ -233,7 +233,3 @@ function findValue() {
 console.time("first-operation");
 optFind(8);
 console.timeEnd("first-operation");
-//call apply bind
-//debouncing and throtlling
-//events
-//
